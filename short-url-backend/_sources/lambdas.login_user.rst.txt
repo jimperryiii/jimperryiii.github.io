@@ -1,0 +1,10 @@
+lambdas.login\_user package
+===========================
+
+lambdas.login\_user.login\_user module
+--------------------------------------
+
+.. automodule:: lambdas.login_user.login_user
+   :members:
+   :undoc-members:
+   :show-inheritance:

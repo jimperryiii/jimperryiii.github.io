@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>api package &mdash; pig.ly URL Shortener 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="api.services package" href="api.services.html" />
+    <link rel="prev" title="flask-url-shortener-restapi" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            pig.ly URL Shortener
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">flask-url-shortener-restapi</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">api package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.services.html">api.services package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-api.app">api.app module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#api.app.create_short_url"><code class="docutils literal notranslate"><span class="pre">create_short_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api.app.delete_short_url"><code class="docutils literal notranslate"><span class="pre">delete_short_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api.app.get_all_short_urls"><code class="docutils literal notranslate"><span class="pre">get_all_short_urls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api.app.get_short_url"><code class="docutils literal notranslate"><span class="pre">get_short_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api.app.home"><code class="docutils literal notranslate"><span class="pre">home()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api.app.login_user"><code class="docutils literal notranslate"><span class="pre">login_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api.app.token_required"><code class="docutils literal notranslate"><span class="pre">token_required()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api.app.update_short_url"><code class="docutils literal notranslate"><span class="pre">update_short_url()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lambdas.html">lambdas package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pig.ly URL Shortener</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">flask-url-shortener-restapi</a></li>
+      <li class="breadcrumb-item active">api package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-package">
+<h1>api package<a class="headerlink" href="#api-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.services.html">api.services package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.services.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.services.aws.html">api.services.aws package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.services.aws.html#module-api.services.aws.secrets">api.services.aws.secrets module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.services.aws.html#module-api.services.aws.short_url">api.services.aws.short_url module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.services.aws.html#module-api.services.aws.user">api.services.aws.user module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.services.mock.html">api.services.mock package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.services.mock.html#module-api.services.mock.secrets">api.services.mock.secrets module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.services.mock.html#module-api.services.mock.short_url">api.services.mock.short_url module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.services.mock.html#module-api.services.mock.user">api.services.mock.user module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-api.app">
+<span id="api-app-module"></span><h2>api.app module<a class="headerlink" href="#module-api.app" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="api.app.create_short_url">
+<span class="sig-prename descclassname"><span class="pre">api.app.</span></span><span class="sig-name descname"><span class="pre">create_short_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/api/app.html#create_short_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.app.create_short_url" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a new short url created by authenticated user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>tuple</em>) – Non-keyword arguements from token_required</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Keyword arguements from token_required</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Newly created short url</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.app.delete_short_url">
+<span class="sig-prename descclassname"><span class="pre">api.app.</span></span><span class="sig-name descname"><span class="pre">delete_short_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/api/app.html#delete_short_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.app.delete_short_url" title="Permalink to this definition"></a></dt>
+<dd><p>Returns None when short url is deleted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>str</em>) – Id of short url to delete</p></li>
+<li><p><strong>args</strong> (<em>tuple</em>) – Non-keyword arguements from token_required</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Keyword arguements from token_required</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.app.get_all_short_urls">
+<span class="sig-prename descclassname"><span class="pre">api.app.</span></span><span class="sig-name descname"><span class="pre">get_all_short_urls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/api/app.html#get_all_short_urls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.app.get_all_short_urls" title="Permalink to this definition"></a></dt>
+<dd><p>Returns all short urls created by authenticated user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>tuple</em>) – Non-keyword arguements from token_required</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Keyword arguements from token_required</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of short urls created by authenticated user</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.app.get_short_url">
+<span class="sig-prename descclassname"><span class="pre">api.app.</span></span><span class="sig-name descname"><span class="pre">get_short_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/api/app.html#get_short_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.app.get_short_url" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a single short url created by authenticated user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>str</em>) – Id of short url</p></li>
+<li><p><strong>args</strong> (<em>tuple</em>) – Non-keyword arguements from token_required</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Keyword arguements from token_required</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Requested short url</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.app.home">
+<span class="sig-prename descclassname"><span class="pre">api.app.</span></span><span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/api/app.html#home"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.app.home" title="Permalink to this definition"></a></dt>
+<dd><p>Health check route that returns hello.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>“Hello”</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.app.login_user">
+<span class="sig-prename descclassname"><span class="pre">api.app.</span></span><span class="sig-name descname"><span class="pre">login_user</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/api/app.html#login_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.app.login_user" title="Permalink to this definition"></a></dt>
+<dd><p>Returns an auth token for the authenticated user. Token is
+required for all other routes and expires after 30 minutes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JWT token for authenticated user</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.app.token_required">
+<span class="sig-prename descclassname"><span class="pre">api.app.</span></span><span class="sig-name descname"><span class="pre">token_required</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/api/app.html#token_required"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.app.token_required" title="Permalink to this definition"></a></dt>
+<dd><p>Returns keyword arguements containing username of authenticated user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<em>func</em>) – Name of wrapped function</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Non-keyword arguements, Keyword arguements</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple, dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.app.update_short_url">
+<span class="sig-prename descclassname"><span class="pre">api.app.</span></span><span class="sig-name descname"><span class="pre">update_short_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/api/app.html#update_short_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.app.update_short_url" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a single short url updated by authenticated user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>str</em>) – Id of short url</p></li>
+<li><p><strong>args</strong> (<em>tuple</em>) – Non-keyword arguements from token_required</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Keyword arguements from token_required</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updated short url</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="flask-url-shortener-restapi" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api.services.html" class="btn btn-neutral float-right" title="api.services package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, James Perry.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

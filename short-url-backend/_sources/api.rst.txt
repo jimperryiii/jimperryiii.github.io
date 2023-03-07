@@ -1,0 +1,18 @@
+api package
+===========
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   api.services
+
+api.app module
+--------------
+
+.. automodule:: api.app
+   :members:
+   :undoc-members:
+   :show-inheritance:

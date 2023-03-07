@@ -1,0 +1,18 @@
+lambdas.short\_url\_redirector package
+======================================
+
+lambdas.short\_url\_redirector.http\_response\_generator module
+---------------------------------------------------------------
+
+.. automodule:: lambdas.short_url_redirector.http_response_generator
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+lambdas.short\_url\_redirector.short\_url\_redirector module
+------------------------------------------------------------
+
+.. automodule:: lambdas.short_url_redirector.short_url_redirector
+   :members:
+   :undoc-members:
+   :show-inheritance:

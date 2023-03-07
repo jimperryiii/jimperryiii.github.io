@@ -1,0 +1,17 @@
+lambdas package
+===============
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   lambdas.create_short_url
+   lambdas.create_user
+   lambdas.delete_short_url
+   lambdas.get_all_short_urls
+   lambdas.get_short_url
+   lambdas.login_user
+   lambdas.short_url_redirector
+   lambdas.update_short_url

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>api.services package &mdash; pig.ly URL Shortener 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="api.services.aws package" href="api.services.aws.html" />
+    <link rel="prev" title="api package" href="api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            pig.ly URL Shortener
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">flask-url-shortener-restapi</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="api.html">api package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="api.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">api.services package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#module-api.app">api.app module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lambdas.html">lambdas package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pig.ly URL Shortener</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">flask-url-shortener-restapi</a></li>
+          <li class="breadcrumb-item"><a href="api.html">api package</a></li>
+      <li class="breadcrumb-item active">api.services package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.services.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-services-package">
+<h1>api.services package<a class="headerlink" href="#api-services-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.services.aws.html">api.services.aws package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.services.aws.html#module-api.services.aws.secrets">api.services.aws.secrets module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.services.aws.html#api.services.aws.secrets.get_secrets"><code class="docutils literal notranslate"><span class="pre">get_secrets()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.services.aws.html#module-api.services.aws.short_url">api.services.aws.short_url module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.services.aws.html#api.services.aws.short_url.ShortURLService"><code class="docutils literal notranslate"><span class="pre">ShortURLService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.services.aws.html#api.services.aws.short_url.ShortURLService.create_short_url"><code class="docutils literal notranslate"><span class="pre">ShortURLService.create_short_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.services.aws.html#api.services.aws.short_url.ShortURLService.delete_short_url"><code class="docutils literal notranslate"><span class="pre">ShortURLService.delete_short_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.services.aws.html#api.services.aws.short_url.ShortURLService.get_all_short_urls"><code class="docutils literal notranslate"><span class="pre">ShortURLService.get_all_short_urls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.services.aws.html#api.services.aws.short_url.ShortURLService.get_short_url"><code class="docutils literal notranslate"><span class="pre">ShortURLService.get_short_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.services.aws.html#api.services.aws.short_url.ShortURLService.update_short_url"><code class="docutils literal notranslate"><span class="pre">ShortURLService.update_short_url()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.services.aws.html#module-api.services.aws.user">api.services.aws.user module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.services.aws.html#api.services.aws.user.UserService"><code class="docutils literal notranslate"><span class="pre">UserService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.services.aws.html#api.services.aws.user.UserService.login_user"><code class="docutils literal notranslate"><span class="pre">UserService.login_user()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.services.mock.html">api.services.mock package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.services.mock.html#module-api.services.mock.secrets">api.services.mock.secrets module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.services.mock.html#api.services.mock.secrets.get_secrets"><code class="docutils literal notranslate"><span class="pre">get_secrets()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.services.mock.html#module-api.services.mock.short_url">api.services.mock.short_url module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.services.mock.html#api.services.mock.short_url.ShortURLService"><code class="docutils literal notranslate"><span class="pre">ShortURLService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.services.mock.html#api.services.mock.short_url.ShortURLService.create_short_url"><code class="docutils literal notranslate"><span class="pre">ShortURLService.create_short_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.services.mock.html#api.services.mock.short_url.ShortURLService.delete_short_url"><code class="docutils literal notranslate"><span class="pre">ShortURLService.delete_short_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.services.mock.html#api.services.mock.short_url.ShortURLService.get_all_short_urls"><code class="docutils literal notranslate"><span class="pre">ShortURLService.get_all_short_urls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.services.mock.html#api.services.mock.short_url.ShortURLService.get_short_url"><code class="docutils literal notranslate"><span class="pre">ShortURLService.get_short_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.services.mock.html#api.services.mock.short_url.ShortURLService.update_short_url"><code class="docutils literal notranslate"><span class="pre">ShortURLService.update_short_url()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.services.mock.html#module-api.services.mock.user">api.services.mock.user module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.services.mock.html#api.services.mock.user.UserService"><code class="docutils literal notranslate"><span class="pre">UserService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.services.mock.html#api.services.mock.user.UserService.login_user"><code class="docutils literal notranslate"><span class="pre">UserService.login_user()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api.html" class="btn btn-neutral float-left" title="api package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api.services.aws.html" class="btn btn-neutral float-right" title="api.services.aws package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, James Perry.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

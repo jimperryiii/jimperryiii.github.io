@@ -1,0 +1,26 @@
+api.services.mock package
+=========================
+
+api.services.mock.secrets module
+--------------------------------
+
+.. automodule:: api.services.mock.secrets
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+api.services.mock.short\_url module
+-----------------------------------
+
+.. automodule:: api.services.mock.short_url
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+api.services.mock.user module
+-----------------------------
+
+.. automodule:: api.services.mock.user
+   :members:
+   :undoc-members:
+   :show-inheritance:

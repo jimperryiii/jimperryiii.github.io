@@ -1,0 +1,11 @@
+api.services package
+====================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   api.services.aws
+   api.services.mock

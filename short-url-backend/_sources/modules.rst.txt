@@ -1,0 +1,8 @@
+flask-url-shortener-restapi
+===========================
+
+.. toctree::
+   :maxdepth: 4
+
+   api
+   lambdas

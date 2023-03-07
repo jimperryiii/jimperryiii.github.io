@@ -1,0 +1,10 @@
+lambdas.get\_short\_url package
+===============================
+
+lambdas.get\_short\_url.get\_short\_url module
+----------------------------------------------
+
+.. automodule:: lambdas.get_short_url.get_short_url
+   :members:
+   :undoc-members:
+   :show-inheritance:

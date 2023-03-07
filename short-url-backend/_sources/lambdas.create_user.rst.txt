@@ -1,0 +1,10 @@
+lambdas.create\_user package
+============================
+
+lambdas.create\_user.create\_user module
+----------------------------------------
+
+.. automodule:: lambdas.create_user.create_user
+   :members:
+   :undoc-members:
+   :show-inheritance:

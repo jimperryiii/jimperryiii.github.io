@@ -1,0 +1,10 @@
+lambdas.create\_short\_url package
+==================================
+
+lambdas.create\_short\_url.create\_short\_url module
+----------------------------------------------------
+
+.. automodule:: lambdas.create_short_url.create_short_url
+   :members:
+   :undoc-members:
+   :show-inheritance:

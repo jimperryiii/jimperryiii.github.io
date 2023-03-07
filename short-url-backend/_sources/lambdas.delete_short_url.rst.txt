@@ -1,0 +1,10 @@
+lambdas.delete\_short\_url package
+==================================
+
+lambdas.delete\_short\_url.delete\_short\_url module
+----------------------------------------------------
+
+.. automodule:: lambdas.delete_short_url.delete_short_url
+   :members:
+   :undoc-members:
+   :show-inheritance:

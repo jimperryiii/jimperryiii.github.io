@@ -1,0 +1,26 @@
+api.services.aws package
+========================
+
+api.services.aws.secrets module
+-------------------------------
+
+.. automodule:: api.services.aws.secrets
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+api.services.aws.short\_url module
+----------------------------------
+
+.. automodule:: api.services.aws.short_url
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+api.services.aws.user module
+----------------------------
+
+.. automodule:: api.services.aws.user
+   :members:
+   :undoc-members:
+   :show-inheritance:

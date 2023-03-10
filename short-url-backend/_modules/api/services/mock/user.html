@@ -71,7 +71,11 @@
 <span></span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">hashlib</span>
 <span class="kn">import</span> <span class="nn">jwt</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="UserService"><a class="viewcode-back" href="../../../../api.services.mock.html#api.services.mock.user.UserService">[docs]</a><span class="k">class</span> <span class="nc">UserService</span><span class="p">:</span>
@@ -83,16 +87,8 @@
 
     <span class="n">_users</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">{</span>
-            <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;pigpen&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;l3tm3!n&quot;</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;user1&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;testpass1&quot;</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;user2&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;testpass2&quot;</span>
+            <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;testuser&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;testpass&quot;</span>
         <span class="p">}</span>
     <span class="p">]</span>
 
@@ -103,29 +99,29 @@
             <span class="n">user</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hash_pwd</span><span class="p">(</span><span class="n">user</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">usersJSON</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_users</span><span class="p">)</span>
 
-<div class="viewcode-block" id="UserService.login_user"><a class="viewcode-back" href="../../../../api.services.mock.html#api.services.mock.user.UserService.login_user">[docs]</a>    <span class="k">def</span> <span class="nf">login_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auth</span><span class="p">):</span>
+<div class="viewcode-block" id="UserService.login_user"><a class="viewcode-back" href="../../../../api.services.mock.html#api.services.mock.user.UserService.login_user">[docs]</a>    <span class="k">def</span> <span class="nf">login_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns an auth token for the authenticated user. Token is</span>
 <span class="sd">        required for all other routes and expires after 30 minutes.</span>
 
-<span class="sd">        :param auth: Dictionary containing username and password</span>
-<span class="sd">        :type auth: dict</span>
+<span class="sd">        :param user: Dictionary containing username and password</span>
+<span class="sd">        :type user: dict</span>
 <span class="sd">        :return: JWT token for authenticated user, HTTP response code</span>
 <span class="sd">        :rtype: str, int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
 
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">auth</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">auth</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">auth</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]:</span>
-                <span class="k">return</span> <span class="s1">&#39;Invalid data&#39;</span><span class="p">,</span> <span class="mi">422</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_user</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Invalid data&#39;</span><span class="p">),</span> <span class="mi">422</span>
 
-            <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">auth</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span>
-                       <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="n">auth</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]}</span>
-            <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mock_invoke</span><span class="p">(</span><span class="s1">&#39;login-user&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span>
+                       <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]}</span>
+            <span class="n">auth_user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mock_invoke</span><span class="p">(</span><span class="s1">&#39;login-user&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="p">:</span>
-                <span class="k">return</span> <span class="s1">&#39;Invalid username or password&#39;</span><span class="p">,</span> <span class="mi">401</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">auth_user</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Invalid username or password&#39;</span><span class="p">),</span> <span class="mi">401</span>
 
             <span class="n">token</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">encode</span><span class="p">({</span>
-                <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">auth_user</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span>
                 <span class="s1">&#39;exp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
             <span class="p">},</span> <span class="bp">self</span><span class="o">.</span><span class="n">secrets</span><span class="p">[</span><span class="s1">&#39;short-url-jwt-secret-key&#39;</span><span class="p">],</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;HS256&#39;</span><span class="p">)</span>
 
@@ -133,8 +129,15 @@
             <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">response</span><span class="p">),</span> <span class="mi">200</span>
 
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
-            <span class="k">return</span> <span class="s1">&#39;Server error&#39;</span><span class="p">,</span> <span class="mi">422</span></div>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Server error&#39;</span><span class="p">),</span> <span class="mi">422</span></div>
+
+    <span class="k">def</span> <span class="nf">_validate_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if user is valid.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">user</span> <span class="ow">and</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">_mock_invoke</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_name</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns results after invoking mock AWS lambda function.</span>
@@ -147,15 +150,31 @@
 <span class="sd">        :return: Results from invoking mock lambda function</span>
 <span class="sd">        :rtype: dict</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">usersData</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">usersJSON</span><span class="p">)</span>
+        <span class="n">functions</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;login-user&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mock_login</span>
+        <span class="p">}</span>
 
-        <span class="k">if</span> <span class="n">function_name</span> <span class="o">==</span> <span class="s1">&#39;login-user&#39;</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">usersData</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="ow">and</span> \
-                   <span class="n">user</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hash_pwd</span><span class="p">(</span><span class="n">payload</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]):</span>
-                    <span class="k">return</span> <span class="n">user</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Invalid function name&#39;</span><span class="p">)</span>
+        <span class="n">mock_function</span> <span class="o">=</span> <span class="n">functions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">function_name</span><span class="p">,</span>
+                                      <span class="bp">self</span><span class="o">.</span><span class="n">_invalid_function_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mock_function</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_mock_login</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns an authenticated user.</span>
+
+<span class="sd">        :param payload: User attempting to authenticate</span>
+<span class="sd">        :type payload: dict</span>
+<span class="sd">        :return: Authenticated user</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">usersData</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">usersJSON</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">usersData</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="ow">and</span> \
+               <span class="n">user</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hash_pwd</span><span class="p">(</span><span class="n">payload</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]):</span>
+                <span class="k">return</span> <span class="n">user</span>
+
+    <span class="k">def</span> <span class="nf">_invalid_function_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Raises exception for invalid function.&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Invalid function name&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_hash_pwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text_pwd</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns salted hash of password.</span>

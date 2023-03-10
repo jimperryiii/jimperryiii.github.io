@@ -128,10 +128,10 @@
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Newly created short url</p>
+<dd class="field-even"><p>Newly created short url, HTTP response code</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
+<dd class="field-odd"><p>str, int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -148,10 +148,10 @@
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dd class="field-even"><p>None, HTTP response code</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dd class="field-odd"><p>None, int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -165,10 +165,10 @@
 <dd class="field-odd"><p><strong>username</strong> (<em>str</em>) – User id for authenticated user</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List of short urls created by authenticated user</p>
+<dd class="field-even"><p>List of short urls, HTTP response code</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
+<dd class="field-odd"><p>str, int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -185,10 +185,10 @@
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Requested short url</p>
+<dd class="field-even"><p>Requested short url, HTTP response code</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
+<dd class="field-odd"><p>str, int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -206,10 +206,10 @@
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Updated short url</p>
+<dd class="field-even"><p>Updated short url, HTTP response code</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
+<dd class="field-odd"><p>str, int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -231,12 +231,12 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="api.services.aws.user.UserService.login_user">
-<span class="sig-name descname"><span class="pre">login_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auth</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/api/services/aws/user.html#UserService.login_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.services.aws.user.UserService.login_user" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">login_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/api/services/aws/user.html#UserService.login_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.services.aws.user.UserService.login_user" title="Permalink to this definition"></a></dt>
 <dd><p>Returns an auth token for the authenticated user. Token is
 required for all other routes and expires after 30 minutes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>auth</strong> (<em>dict</em>) – Dictionary containing username and password</p>
+<dd class="field-odd"><p><strong>user</strong> (<em>dict</em>) – Dictionary containing username and password</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>JWT token for authenticated user, HTTP response code</p>

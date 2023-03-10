@@ -69,6 +69,7 @@
              
   <h1>Source code for api.app</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">jwt</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span>
 <span class="kn">from</span> <span class="nn">flask_cors</span> <span class="kn">import</span> <span class="n">CORS</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
@@ -78,6 +79,8 @@
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 <span class="n">CORS</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 <span class="n">secrets</span> <span class="o">=</span> <span class="n">get_secrets</span><span class="p">(</span><span class="s1">&#39;short-url-secrets&#39;</span><span class="p">)</span>
 <span class="n">userService</span> <span class="o">=</span> <span class="n">UserService</span><span class="p">(</span><span class="n">secrets</span><span class="p">)</span>
 <span class="n">shortURLService</span> <span class="o">=</span> <span class="n">ShortURLService</span><span class="p">()</span>
@@ -88,7 +91,7 @@
 
 <span class="sd">    :param f: Name of wrapped function</span>
 <span class="sd">    :type f: func</span>
-<span class="sd">    :return: Non-keyword arguements, Keyword arguements </span>
+<span class="sd">    :return: Non-keyword arguements, Keyword arguements</span>
 <span class="sd">    :rtype: tuple, dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -108,7 +111,7 @@
             <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">token_payload</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
 
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">),</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
             <span class="k">return</span> <span class="s1">&#39;Unauthorized access&#39;</span><span class="p">,</span> <span class="mi">401</span>
 
         <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -131,6 +134,8 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns an auth token for the authenticated user. Token is</span>
 <span class="sd">    required for all other routes and expires after 30 minutes.</span>
 
+<span class="sd">    ``POST: &#39;/v1/login&#39;``</span>
+
 <span class="sd">    :return: JWT token for authenticated user</span>
 <span class="sd">    :rtype: str</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -142,6 +147,8 @@
 <span class="nd">@token_required</span>
 <span class="k">def</span> <span class="nf">get_all_short_urls</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns all short urls created by authenticated user.</span>
+
+<span class="sd">    ``GET: &#39;/v1/short-urls&#39;`` **Token Required**</span>
 
 <span class="sd">    :param args: Non-keyword arguements from token_required</span>
 <span class="sd">    :type args: tuple</span>
@@ -158,6 +165,8 @@
 <span class="k">def</span> <span class="nf">create_short_url</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a new short url created by authenticated user.</span>
 
+<span class="sd">    ``POST: &#39;/v1/short-urls&#39;`` **Token Required**</span>
+
 <span class="sd">    :param args: Non-keyword arguements from token_required</span>
 <span class="sd">    :type args: tuple</span>
 <span class="sd">    :param kwargs: Keyword arguements from token_required</span>
@@ -173,6 +182,8 @@
 <span class="nd">@token_required</span>
 <span class="k">def</span> <span class="nf">get_short_url</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a single short url created by authenticated user.</span>
+
+<span class="sd">    ``GET: &#39;/v1/short-urls/&lt;id&gt;&#39;`` **Token Required**</span>
 
 <span class="sd">    :param id: Id of short url</span>
 <span class="sd">    :type id: str</span>
@@ -191,6 +202,8 @@
 <span class="k">def</span> <span class="nf">update_short_url</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a single short url updated by authenticated user.</span>
 
+<span class="sd">    ``PUT: &#39;/v1/short-urls/&lt;id&gt;&#39;`` **Token Required**</span>
+
 <span class="sd">    :param id: Id of short url</span>
 <span class="sd">    :type id: str</span>
 <span class="sd">    :param args: Non-keyword arguements from token_required</span>
@@ -208,7 +221,9 @@
 <div class="viewcode-block" id="delete_short_url"><a class="viewcode-back" href="../../api.html#api.app.delete_short_url">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/v1/short-urls/&lt;string:id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;DELETE&#39;</span><span class="p">])</span>
 <span class="nd">@token_required</span>
 <span class="k">def</span> <span class="nf">delete_short_url</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns None when short url is deleted.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns &#39;Item deleted&#39; when short url is deleted.</span>
+
+<span class="sd">    ``DELETE: &#39;/v1/short-urls/&lt;id&gt;&#39;`` **Token Required**</span>
 
 <span class="sd">    :param id: Id of short url to delete</span>
 <span class="sd">    :type id: str</span>
@@ -216,8 +231,8 @@
 <span class="sd">    :type args: tuple</span>
 <span class="sd">    :param kwargs: Keyword arguements from token_required</span>
 <span class="sd">    :type kwargs: dict</span>
-<span class="sd">    :return: None</span>
-<span class="sd">    :rtype: None</span>
+<span class="sd">    :return: &#39;Item deleted&#39;</span>
+<span class="sd">    :rtype: str</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">shortURLService</span><span class="o">.</span><span class="n">delete_short_url</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">])</span></div>
 </pre></div>

@@ -71,7 +71,11 @@
 <span></span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">boto3</span>
 <span class="kn">import</span> <span class="nn">jwt</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="UserService"><a class="viewcode-back" href="../../../../api.services.aws.html#api.services.aws.user.UserService">[docs]</a><span class="k">class</span> <span class="nc">UserService</span><span class="p">:</span>
@@ -86,29 +90,29 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;lambda&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">secrets</span> <span class="o">=</span> <span class="n">secrets</span>
 
-<div class="viewcode-block" id="UserService.login_user"><a class="viewcode-back" href="../../../../api.services.aws.html#api.services.aws.user.UserService.login_user">[docs]</a>    <span class="k">def</span> <span class="nf">login_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auth</span><span class="p">):</span>
+<div class="viewcode-block" id="UserService.login_user"><a class="viewcode-back" href="../../../../api.services.aws.html#api.services.aws.user.UserService.login_user">[docs]</a>    <span class="k">def</span> <span class="nf">login_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns an auth token for the authenticated user. Token is</span>
 <span class="sd">        required for all other routes and expires after 30 minutes.</span>
 
-<span class="sd">        :param auth: Dictionary containing username and password</span>
-<span class="sd">        :type auth: dict</span>
+<span class="sd">        :param user: Dictionary containing username and password</span>
+<span class="sd">        :type user: dict</span>
 <span class="sd">        :return: JWT token for authenticated user, HTTP response code</span>
 <span class="sd">        :rtype: str, int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
 
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">auth</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">auth</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">auth</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]:</span>
-                <span class="k">return</span> <span class="s1">&#39;Invalid data&#39;</span><span class="p">,</span> <span class="mi">422</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_user</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Invalid data&#39;</span><span class="p">),</span> <span class="mi">422</span>
 
-            <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">auth</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span>
-                       <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="n">auth</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]}</span>
-            <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lambda_invoke</span><span class="p">(</span><span class="s1">&#39;login-user&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span>
+                       <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]}</span>
+            <span class="n">auth_user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lambda_invoke</span><span class="p">(</span><span class="s1">&#39;login-user&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="p">:</span>
-                <span class="k">return</span> <span class="s1">&#39;Invalid username or password&#39;</span><span class="p">,</span> <span class="mi">401</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">auth_user</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Invalid username or password&#39;</span><span class="p">),</span> <span class="mi">401</span>
 
             <span class="n">token</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">encode</span><span class="p">({</span>
-                <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">auth_user</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span>
                 <span class="s1">&#39;exp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
             <span class="p">},</span> <span class="bp">self</span><span class="o">.</span><span class="n">secrets</span><span class="p">[</span><span class="s1">&#39;short-url-jwt-secret-key&#39;</span><span class="p">],</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;HS256&#39;</span><span class="p">)</span>
 
@@ -116,8 +120,15 @@
             <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">response</span><span class="p">),</span> <span class="mi">200</span>
 
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
-            <span class="k">return</span> <span class="s1">&#39;Server error&#39;</span><span class="p">,</span> <span class="mi">422</span></div>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Server error&#39;</span><span class="p">),</span> <span class="mi">422</span></div>
+
+    <span class="k">def</span> <span class="nf">_validate_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if user is valid.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">user</span> <span class="ow">and</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">_lambda_invoke</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_name</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns results after invoking AWS lambda function.</span>

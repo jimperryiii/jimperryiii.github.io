@@ -78,28 +78,16 @@
 
     <span class="n">_short_urls</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">{</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;UhB4jgG&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;destination&quot;</span><span class="p">:</span> <span class="s2">&quot;www.reddit.com&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Reddit&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;pigpen&quot;</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;testid1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;destination&quot;</span><span class="p">:</span> <span class="s2">&quot;www.test.com&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Test&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;testuser&quot;</span>
         <span class="p">},</span>
         <span class="p">{</span>
-             <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;ilzqwSx&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;destination&quot;</span><span class="p">:</span> <span class="s2">&quot;www.amazon.com&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Amazon&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;user1&quot;</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-             <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;08ynPl6&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;destination&quot;</span><span class="p">:</span> <span class="s2">&quot;www.google.com&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Google&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;user2&quot;</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-             <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;v4dzqTh&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;destination&quot;</span><span class="p">:</span> <span class="s2">&quot;www.apple.com&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Apple&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;pigpen&quot;</span>
+             <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;testid2&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;destination&quot;</span><span class="p">:</span> <span class="s2">&quot;www.example.com&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Example&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;testuser&quot;</span>
         <span class="p">}</span>
     <span class="p">]</span>
 
@@ -112,12 +100,12 @@
 
 <span class="sd">        :param username: User id for authenticated user</span>
 <span class="sd">        :type username: str</span>
-<span class="sd">        :return: List of short urls created by authenticated user</span>
-<span class="sd">        :rtype: str</span>
+<span class="sd">        :return: List of short urls, HTTP response code</span>
+<span class="sd">        :rtype: str, int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">}</span>
         <span class="n">short_urls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mock_invoke</span><span class="p">(</span><span class="s1">&#39;get-all-short-urls&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_urls</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_urls</span><span class="p">),</span> <span class="mi">200</span></div>
 
 <div class="viewcode-block" id="ShortURLService.create_short_url"><a class="viewcode-back" href="../../../../api.services.mock.html#api.services.mock.short_url.ShortURLService.create_short_url">[docs]</a>    <span class="k">def</span> <span class="nf">create_short_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">short_url</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a new short url created by authenticated user.</span>
@@ -126,13 +114,19 @@
 <span class="sd">        :type short_url: str</span>
 <span class="sd">        :param username: User id for authenticated user</span>
 <span class="sd">        :type username: str</span>
-<span class="sd">        :return: Newly created short url</span>
-<span class="sd">        :rtype: str</span>
+<span class="sd">        :return: Newly created short url, HTTP response code</span>
+<span class="sd">        :rtype: str, int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_short_url</span><span class="p">(</span><span class="n">short_url</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Invalid data&#39;</span><span class="p">),</span> <span class="mi">422</span>
+
         <span class="n">payload</span> <span class="o">=</span> <span class="n">short_url</span>
         <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">username</span>
         <span class="n">short_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mock_invoke</span><span class="p">(</span><span class="s1">&#39;create-short-url&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_url</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="n">short_url</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_url</span><span class="p">),</span> <span class="mi">200</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Short url not created&#39;</span><span class="p">),</span> <span class="mi">409</span></div>
 
 <div class="viewcode-block" id="ShortURLService.get_short_url"><a class="viewcode-back" href="../../../../api.services.mock.html#api.services.mock.short_url.ShortURLService.get_short_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_short_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a single short url created by authenticated user.</span>
@@ -141,12 +135,15 @@
 <span class="sd">        :type id: str</span>
 <span class="sd">        :param username: User id for authenticated user</span>
 <span class="sd">        :type username: str</span>
-<span class="sd">        :return: Requested short url</span>
-<span class="sd">        :rtype: str</span>
+<span class="sd">        :return: Requested short url, HTTP response code</span>
+<span class="sd">        :rtype: str, int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">}</span>
         <span class="n">short_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mock_invoke</span><span class="p">(</span><span class="s1">&#39;get-short-url&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_url</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="n">short_url</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_url</span><span class="p">),</span> <span class="mi">200</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Short url not found&#39;</span><span class="p">),</span> <span class="mi">404</span></div>
 
 <div class="viewcode-block" id="ShortURLService.update_short_url"><a class="viewcode-back" href="../../../../api.services.mock.html#api.services.mock.short_url.ShortURLService.update_short_url">[docs]</a>    <span class="k">def</span> <span class="nf">update_short_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">updated_short_url</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a single short url updated by authenticated user.</span>
@@ -157,14 +154,20 @@
 <span class="sd">        :type updated_short_url: str</span>
 <span class="sd">        :param username: User id for authenticated user</span>
 <span class="sd">        :type username: str</span>
-<span class="sd">        :return: Updated short url</span>
-<span class="sd">        :rtype: str</span>
+<span class="sd">        :return: Updated short url, HTTP response code</span>
+<span class="sd">        :rtype: str, int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_short_url</span><span class="p">(</span><span class="n">updated_short_url</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Invalid data&#39;</span><span class="p">),</span> <span class="mi">422</span>
+
         <span class="n">payload</span> <span class="o">=</span> <span class="n">updated_short_url</span>
         <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">id</span>
         <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">username</span>
         <span class="n">short_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mock_invoke</span><span class="p">(</span><span class="s1">&#39;update-short-url&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_url</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="n">short_url</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_url</span><span class="p">),</span> <span class="mi">200</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Short url not found&#39;</span><span class="p">),</span> <span class="mi">404</span></div>
 
 <div class="viewcode-block" id="ShortURLService.delete_short_url"><a class="viewcode-back" href="../../../../api.services.mock.html#api.services.mock.short_url.ShortURLService.delete_short_url">[docs]</a>    <span class="k">def</span> <span class="nf">delete_short_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns None when short url is deleted.</span>
@@ -173,12 +176,22 @@
 <span class="sd">        :type id: str</span>
 <span class="sd">        :param username: User id for authenticated user</span>
 <span class="sd">        :type username: str</span>
-<span class="sd">        :return: None</span>
-<span class="sd">        :rtype: None</span>
+<span class="sd">        :return: None, HTTP response code</span>
+<span class="sd">        :rtype: None, int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">}</span>
         <span class="n">short_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mock_invoke</span><span class="p">(</span><span class="s1">&#39;delete-short-url&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_url</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="n">short_url</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_url</span><span class="p">),</span> <span class="mi">200</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Short url not found&#39;</span><span class="p">),</span> <span class="mi">404</span></div>
+
+    <span class="k">def</span> <span class="nf">_validate_short_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">short_url</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if short url is valid.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">short_url</span> <span class="ow">and</span> <span class="n">short_url</span><span class="p">[</span><span class="s1">&#39;destination&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">short_url</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">_mock_invoke</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_name</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns results after invoking mock AWS lambda function.</span>
@@ -191,44 +204,95 @@
 <span class="sd">        :return: Results from invoking mock lambda function</span>
 <span class="sd">        :rtype: dict</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">functions</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;get-all-short-urls&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mock_get_all</span><span class="p">,</span>
+            <span class="s1">&#39;create-short-url&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mock_create</span><span class="p">,</span>
+            <span class="s1">&#39;get-short-url&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mock_get</span><span class="p">,</span>
+            <span class="s1">&#39;update-short-url&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mock_update</span><span class="p">,</span>
+            <span class="s1">&#39;delete-short-url&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mock_delete</span>
+        <span class="p">}</span>
+
+        <span class="n">mock_function</span> <span class="o">=</span> <span class="n">functions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">function_name</span><span class="p">,</span>
+                                      <span class="bp">self</span><span class="o">.</span><span class="n">_invalid_function_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mock_function</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_mock_get_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns all short urls created by authenticated user.</span>
+
+<span class="sd">        :param payload: User id for authenticated user</span>
+<span class="sd">        :type payload: dict</span>
+<span class="sd">        :return: List of short urls created by authenticated user</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">short_urlsData</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">short_urlsJSON</span><span class="p">)</span>
+        <span class="n">short_urlsFiltered</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">short_urlsData</span> <span class="k">if</span>
+                              <span class="n">x</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="n">short_urlsFiltered</span>
 
-        <span class="k">if</span> <span class="n">function_name</span> <span class="o">==</span> <span class="s1">&#39;get-all-short-urls&#39;</span><span class="p">:</span>
-            <span class="n">short_urlsFiltered</span> <span class="o">=</span> \
-                <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">short_urlsData</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">==</span>
-                 <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]]</span>
-            <span class="k">return</span> <span class="n">short_urlsFiltered</span>
+    <span class="k">def</span> <span class="nf">_mock_create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a new short url created by authenticated user.</span>
 
-        <span class="k">elif</span> <span class="n">function_name</span> <span class="o">==</span> <span class="s1">&#39;create-short-url&#39;</span><span class="p">:</span>
-            <span class="n">short_url</span> <span class="o">=</span> <span class="n">payload</span>
-            <span class="n">short_url</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_short_path</span><span class="p">()</span>
-            <span class="n">short_urlsData</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">short_url</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">short_urlsJSON</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_urlsData</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">short_url</span>
+<span class="sd">        :param payload: Short url to be created</span>
+<span class="sd">        :type payload: dict</span>
+<span class="sd">        :return: Newly created short url</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">short_urlsData</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">short_urlsJSON</span><span class="p">)</span>
+        <span class="n">short_url</span> <span class="o">=</span> <span class="n">payload</span>
+        <span class="n">short_url</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_short_path</span><span class="p">()</span>
+        <span class="n">short_urlsData</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">short_url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">short_urlsJSON</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_urlsData</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">short_url</span>
 
-        <span class="k">elif</span> <span class="n">function_name</span> <span class="o">==</span> <span class="s1">&#39;get-short-url&#39;</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">short_url</span> <span class="ow">in</span> <span class="n">short_urlsData</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">short_url</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="ow">and</span> \
-                   <span class="n">short_url</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]:</span>
-                    <span class="k">return</span> <span class="n">short_url</span>
+    <span class="k">def</span> <span class="nf">_mock_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a single short url created by authenticated user.</span>
 
-        <span class="k">elif</span> <span class="n">function_name</span> <span class="o">==</span> <span class="s1">&#39;update-short-url&#39;</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">short_url</span> <span class="ow">in</span> <span class="n">short_urlsData</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">short_url</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="ow">and</span> \
-                   <span class="n">short_url</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]:</span>
-                    <span class="n">short_url</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">short_urlsJSON</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_urlsData</span><span class="p">)</span>
-                    <span class="k">return</span> <span class="n">short_url</span>
+<span class="sd">        :param payload: Id of short url</span>
+<span class="sd">        :type payload: dict</span>
+<span class="sd">        :return: Requested short url</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">short_urlsData</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">short_urlsJSON</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">short_url</span> <span class="ow">in</span> <span class="n">short_urlsData</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">short_url</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="ow">and</span> \
+                    <span class="n">short_url</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">short_url</span>
 
-        <span class="k">elif</span> <span class="n">function_name</span> <span class="o">==</span> <span class="s1">&#39;delete-short-url&#39;</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">short_url</span> <span class="ow">in</span> <span class="n">short_urlsData</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">short_url</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="ow">and</span> \
-                   <span class="n">short_url</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]:</span>
-                    <span class="n">short_urlsData</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">short_url</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">short_urlsJSON</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_urlsData</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_mock_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a single short url updated by authenticated user.</span>
 
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Invalid function name&#39;</span><span class="p">)</span>
+<span class="sd">        :param payload: Short url updates</span>
+<span class="sd">        :type id: dict</span>
+<span class="sd">        :return: Updated short url</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">short_urlsData</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">short_urlsJSON</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">short_url</span> <span class="ow">in</span> <span class="n">short_urlsData</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">short_url</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="ow">and</span> \
+                    <span class="n">short_url</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]:</span>
+                <span class="n">short_url</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">short_urlsJSON</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_urlsData</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">short_url</span>
+
+    <span class="k">def</span> <span class="nf">_mock_delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns &#39;Item deleted&#39; when short url is deleted.</span>
+
+<span class="sd">        :param payload: Id of short url to delete</span>
+<span class="sd">        :type payload: str</span>
+<span class="sd">        :return: &#39;Item deleted&#39;</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">short_urlsData</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">short_urlsJSON</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">short_url</span> <span class="ow">in</span> <span class="n">short_urlsData</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">short_url</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="ow">and</span> \
+                    <span class="n">short_url</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]:</span>
+                <span class="n">short_urlsData</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">short_url</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">short_urlsJSON</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_urlsData</span><span class="p">)</span>
+                <span class="k">return</span> <span class="s1">&#39;Item deleted&#39;</span>
+
+    <span class="k">def</span> <span class="nf">_invalid_function_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Raises exception for invalid function.&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Invalid function name&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_generate_short_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
                              <span class="n">chars</span><span class="o">=</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span><span class="p">):</span>

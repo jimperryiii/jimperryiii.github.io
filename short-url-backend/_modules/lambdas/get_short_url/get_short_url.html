@@ -102,7 +102,7 @@
 <span class="sd">    :param username: User id for authenticated user</span>
 <span class="sd">    :type username: str</span>
 <span class="sd">    :return: Requested short url</span>
-<span class="sd">    :rtype: str</span>
+<span class="sd">    :rtype: dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dynamodb</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;dynamodb&#39;</span><span class="p">)</span>
     <span class="n">table</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s1">&#39;short-urls&#39;</span><span class="p">)</span>

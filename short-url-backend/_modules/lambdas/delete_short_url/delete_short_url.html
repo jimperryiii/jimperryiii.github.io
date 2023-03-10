@@ -69,6 +69,7 @@
              
   <h1>Source code for lambdas.delete_short_url.delete_short_url</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">from</span> <span class="nn">botocore.exceptions</span> <span class="kn">import</span> <span class="n">ClientError</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
@@ -95,14 +96,14 @@
 
 
 <div class="viewcode-block" id="delete_short_url"><a class="viewcode-back" href="../../../lambdas.delete_short_url.html#lambdas.delete_short_url.delete_short_url.delete_short_url">[docs]</a><span class="k">def</span> <span class="nf">delete_short_url</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns None when short url is deleted.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns &#39;Item deleted&#39; when short url is deleted.</span>
 
 <span class="sd">    :param id: Id of short url to delete</span>
 <span class="sd">    :type id: str</span>
 <span class="sd">    :param username: User id for authenticated user</span>
 <span class="sd">    :type username: str</span>
-<span class="sd">    :return: None</span>
-<span class="sd">    :rtype: None</span>
+<span class="sd">    :return: &#39;Item deleted&#39;</span>
+<span class="sd">    :rtype: str</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dynamodb</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;dynamodb&#39;</span><span class="p">)</span>
     <span class="n">table</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s1">&#39;short-urls&#39;</span><span class="p">)</span>
@@ -110,12 +111,25 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="n">validate_input</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
         <span class="k">return</span>
 
-    <span class="n">table</span><span class="o">.</span><span class="n">delete_item</span><span class="p">(</span>
-        <span class="n">Key</span><span class="o">=</span><span class="p">{</span>
-            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
-            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="nb">id</span>
-        <span class="p">},</span>
-    <span class="p">)</span></div>
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">table</span><span class="o">.</span><span class="n">delete_item</span><span class="p">(</span>
+            <span class="n">Key</span><span class="o">=</span><span class="p">{</span>
+                <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+                <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="nb">id</span>
+            <span class="p">},</span>
+            <span class="n">ConditionExpression</span><span class="o">=</span><span class="s1">&#39;attribute_exists(id) AND </span><span class="se">\</span>
+<span class="s1">                                attribute_exists(username)&#39;</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="s1">&#39;Item deleted&#39;</span>
+    <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">error</span><span class="o">.</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;Error&#39;</span><span class="p">][</span><span class="s1">&#39;Code&#39;</span><span class="p">]</span> <span class="o">==</span> \
+                <span class="s1">&#39;ConditionalCheckFailedException&#39;</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">error</span></div>
 
 
 <div class="viewcode-block" id="validate_event"><a class="viewcode-back" href="../../../lambdas.delete_short_url.html#lambdas.delete_short_url.delete_short_url.validate_event">[docs]</a><span class="k">def</span> <span class="nf">validate_event</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>

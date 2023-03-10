@@ -125,6 +125,7 @@
 <dt class="sig sig-object py" id="api.app.create_short_url">
 <span class="sig-prename descclassname"><span class="pre">api.app.</span></span><span class="sig-name descname"><span class="pre">create_short_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/api/app.html#create_short_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.app.create_short_url" title="Permalink to this definition"></a></dt>
 <dd><p>Returns a new short url created by authenticated user.</p>
+<p><code class="docutils literal notranslate"><span class="pre">POST:</span> <span class="pre">'/v1/short-urls'</span></code> <strong>Token Required</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -144,7 +145,8 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="api.app.delete_short_url">
 <span class="sig-prename descclassname"><span class="pre">api.app.</span></span><span class="sig-name descname"><span class="pre">delete_short_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/api/app.html#delete_short_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.app.delete_short_url" title="Permalink to this definition"></a></dt>
-<dd><p>Returns None when short url is deleted.</p>
+<dd><p>Returns ‘Item deleted’ when short url is deleted.</p>
+<p><code class="docutils literal notranslate"><span class="pre">DELETE:</span> <span class="pre">'/v1/short-urls/&lt;id&gt;'</span></code> <strong>Token Required</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -154,10 +156,10 @@
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dd class="field-even"><p>‘Item deleted’</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -166,6 +168,7 @@
 <dt class="sig sig-object py" id="api.app.get_all_short_urls">
 <span class="sig-prename descclassname"><span class="pre">api.app.</span></span><span class="sig-name descname"><span class="pre">get_all_short_urls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/api/app.html#get_all_short_urls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.app.get_all_short_urls" title="Permalink to this definition"></a></dt>
 <dd><p>Returns all short urls created by authenticated user.</p>
+<p><code class="docutils literal notranslate"><span class="pre">GET:</span> <span class="pre">'/v1/short-urls'</span></code> <strong>Token Required</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -186,6 +189,7 @@
 <dt class="sig sig-object py" id="api.app.get_short_url">
 <span class="sig-prename descclassname"><span class="pre">api.app.</span></span><span class="sig-name descname"><span class="pre">get_short_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/api/app.html#get_short_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.app.get_short_url" title="Permalink to this definition"></a></dt>
 <dd><p>Returns a single short url created by authenticated user.</p>
+<p><code class="docutils literal notranslate"><span class="pre">GET:</span> <span class="pre">'/v1/short-urls/&lt;id&gt;'</span></code> <strong>Token Required</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -222,6 +226,7 @@
 <span class="sig-prename descclassname"><span class="pre">api.app.</span></span><span class="sig-name descname"><span class="pre">login_user</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/api/app.html#login_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.app.login_user" title="Permalink to this definition"></a></dt>
 <dd><p>Returns an auth token for the authenticated user. Token is
 required for all other routes and expires after 30 minutes.</p>
+<p><code class="docutils literal notranslate"><span class="pre">POST:</span> <span class="pre">'/v1/login'</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>JWT token for authenticated user</p>
@@ -253,6 +258,7 @@ required for all other routes and expires after 30 minutes.</p>
 <dt class="sig sig-object py" id="api.app.update_short_url">
 <span class="sig-prename descclassname"><span class="pre">api.app.</span></span><span class="sig-name descname"><span class="pre">update_short_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/api/app.html#update_short_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.app.update_short_url" title="Permalink to this definition"></a></dt>
 <dd><p>Returns a single short url updated by authenticated user.</p>
+<p><code class="docutils literal notranslate"><span class="pre">PUT:</span> <span class="pre">'/v1/short-urls/&lt;id&gt;'</span></code> <strong>Token Required</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">

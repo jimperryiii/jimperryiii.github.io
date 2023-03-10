@@ -84,12 +84,12 @@
 
 <span class="sd">        :param username: User id for authenticated user</span>
 <span class="sd">        :type username: str</span>
-<span class="sd">        :return: List of short urls created by authenticated user</span>
-<span class="sd">        :rtype: str</span>
+<span class="sd">        :return: List of short urls, HTTP response code</span>
+<span class="sd">        :rtype: str, int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">}</span>
         <span class="n">short_urls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lambda_invoke</span><span class="p">(</span><span class="s1">&#39;get-all-short-urls&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_urls</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_urls</span><span class="p">),</span> <span class="mi">200</span></div>
 
 <div class="viewcode-block" id="ShortURLService.create_short_url"><a class="viewcode-back" href="../../../../api.services.aws.html#api.services.aws.short_url.ShortURLService.create_short_url">[docs]</a>    <span class="k">def</span> <span class="nf">create_short_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">short_url</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a new short url created by authenticated user.</span>
@@ -98,13 +98,20 @@
 <span class="sd">        :type short_url: str</span>
 <span class="sd">        :param username: User id for authenticated user</span>
 <span class="sd">        :type username: str</span>
-<span class="sd">        :return: Newly created short url</span>
-<span class="sd">        :rtype: str</span>
+<span class="sd">        :return: Newly created short url, HTTP response code</span>
+<span class="sd">        :rtype: str, int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_short_url</span><span class="p">(</span><span class="n">short_url</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Invalid data&#39;</span><span class="p">),</span> <span class="mi">422</span>
+
         <span class="n">payload</span> <span class="o">=</span> <span class="n">short_url</span>
         <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">username</span>
         <span class="n">short_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lambda_invoke</span><span class="p">(</span><span class="s1">&#39;create-short-url&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_url</span><span class="p">)</span></div>
+
+        <span class="k">if</span> <span class="n">short_url</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_url</span><span class="p">),</span> <span class="mi">200</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Short url not created&#39;</span><span class="p">),</span> <span class="mi">409</span></div>
 
 <div class="viewcode-block" id="ShortURLService.get_short_url"><a class="viewcode-back" href="../../../../api.services.aws.html#api.services.aws.short_url.ShortURLService.get_short_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_short_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a single short url created by authenticated user.</span>
@@ -113,12 +120,16 @@
 <span class="sd">        :type id: str</span>
 <span class="sd">        :param username: User id for authenticated user</span>
 <span class="sd">        :type username: str</span>
-<span class="sd">        :return: Requested short url</span>
-<span class="sd">        :rtype: str</span>
+<span class="sd">        :return: Requested short url, HTTP response code</span>
+<span class="sd">        :rtype: str, int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">}</span>
         <span class="n">short_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lambda_invoke</span><span class="p">(</span><span class="s1">&#39;get-short-url&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_url</span><span class="p">)</span></div>
+
+        <span class="k">if</span> <span class="n">short_url</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_url</span><span class="p">),</span> <span class="mi">200</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Short url not found&#39;</span><span class="p">),</span> <span class="mi">404</span></div>
 
 <div class="viewcode-block" id="ShortURLService.update_short_url"><a class="viewcode-back" href="../../../../api.services.aws.html#api.services.aws.short_url.ShortURLService.update_short_url">[docs]</a>    <span class="k">def</span> <span class="nf">update_short_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">updated_short_url</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a single short url updated by authenticated user.</span>
@@ -129,14 +140,21 @@
 <span class="sd">        :type updated_short_url: str</span>
 <span class="sd">        :param username: User id for authenticated user</span>
 <span class="sd">        :type username: str</span>
-<span class="sd">        :return: Updated short url</span>
-<span class="sd">        :rtype: str</span>
+<span class="sd">        :return: Updated short url, HTTP response code</span>
+<span class="sd">        :rtype: str, int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_short_url</span><span class="p">(</span><span class="n">updated_short_url</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Invalid data&#39;</span><span class="p">),</span> <span class="mi">422</span>
+
         <span class="n">payload</span> <span class="o">=</span> <span class="n">updated_short_url</span>
         <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">id</span>
         <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">username</span>
         <span class="n">short_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lambda_invoke</span><span class="p">(</span><span class="s1">&#39;update-short-url&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_url</span><span class="p">)</span></div>
+
+        <span class="k">if</span> <span class="n">short_url</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_url</span><span class="p">),</span> <span class="mi">200</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Short url not found&#39;</span><span class="p">),</span> <span class="mi">404</span></div>
 
 <div class="viewcode-block" id="ShortURLService.delete_short_url"><a class="viewcode-back" href="../../../../api.services.aws.html#api.services.aws.short_url.ShortURLService.delete_short_url">[docs]</a>    <span class="k">def</span> <span class="nf">delete_short_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns None when short url is deleted.</span>
@@ -145,12 +163,23 @@
 <span class="sd">        :type id: str</span>
 <span class="sd">        :param username: User id for authenticated user</span>
 <span class="sd">        :type username: str</span>
-<span class="sd">        :return: None</span>
-<span class="sd">        :rtype: None</span>
+<span class="sd">        :return: None, HTTP response code</span>
+<span class="sd">        :rtype: None, int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">}</span>
         <span class="n">short_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lambda_invoke</span><span class="p">(</span><span class="s1">&#39;delete-short-url&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_url</span><span class="p">)</span></div>
+
+        <span class="k">if</span> <span class="n">short_url</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">short_url</span><span class="p">),</span> <span class="mi">200</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Short url not found&#39;</span><span class="p">),</span> <span class="mi">404</span></div>
+
+    <span class="k">def</span> <span class="nf">_validate_short_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">short_url</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if short url is valid.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">short_url</span> <span class="ow">and</span> <span class="n">short_url</span><span class="p">[</span><span class="s1">&#39;destination&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">short_url</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">_lambda_invoke</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_name</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns results after invoking AWS lambda function.</span>
